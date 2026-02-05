@@ -601,7 +601,7 @@ Este proyecto fue desarrollado para el Open House 2026 de la PUCMM.
 
 <div align="center">
 
-**Desarrollado con ❤️ para PUCMM**
+**Desarrollado por Wolflags para CICC PUCMM**
 
 *Ingeniería en Ciencias de la Computación*
 
