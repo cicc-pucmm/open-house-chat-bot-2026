@@ -86,28 +86,54 @@ ollama --version
 
 ## 🚀 Instalación
 
-### macOS (Principal)
+###  macOS
 
 #### 1. Instalar Homebrew (si no lo tienes)
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-#### 2. Instalar dependencias
-```bash
-# Instalar Docker Desktop
-brew install --cask docker
+#### 2. Instalar Docker (elige una opción)
 
-# Instalar Ollama
+<details>
+<summary><b>Opción A: OrbStack (Recomendado)</b> — Más rápido y ligero</summary>
+
+```bash
+brew install --cask orbstack
+```
+
+OrbStack es una alternativa moderna a Docker Desktop, optimizada para Mac:
+- ⚡ Inicio más rápido
+- 💾 Menor consumo de memoria
+- 🔋 Mejor eficiencia de batería
+- ✅ 100% compatible con Docker
+
+Después de instalar, abre OrbStack desde Applications.
+
+</details>
+
+<details>
+<summary><b>Opción B: Docker Desktop</b> — Opción tradicional</summary>
+
+```bash
+brew install --cask docker
+```
+
+Después de instalar, abre Docker Desktop y espera a que inicie completamente.
+
+</details>
+
+#### 3. Instalar Ollama
+```bash
 brew install ollama
 ```
 
-#### 3. Descargar el modelo de IA
+#### 4. Descargar el modelo de IA
 ```bash
 ollama pull llama3.1:8b
 ```
 
-#### 4. Clonar y ejecutar
+#### 5. Clonar y ejecutar
 ```bash
 # Clonar el repositorio
 git clone <repository-url>
@@ -120,7 +146,7 @@ ollama serve
 docker compose up --build
 ```
 
-#### 5. Abrir en el navegador
+#### 6. Abrir en el navegador
 ```
 http://localhost:8000
 ```
@@ -278,30 +304,155 @@ environment:
 | `OLLAMA_URL` | URL del servidor Ollama | `http://host.docker.internal:11434` |
 | `OLLAMA_MODEL` | Modelo de IA a utilizar | `llama3.1:8b` |
 
-### Cambiar el Modelo
+---
 
-Para usar un modelo diferente:
+### 🤖 Cambiar el Modelo de IA
 
+Puedes usar cualquier modelo compatible con Ollama. Aquí están las opciones más comunes:
+
+#### Modelos Recomendados
+
+| Modelo | RAM Mínima | Velocidad | Calidad | Comando |
+|--------|------------|-----------|---------|---------|
+| `llama3.2:1b` | 4 GB | ⚡⚡⚡ Muy rápido | ⭐⭐ Básica | `ollama pull llama3.2:1b` |
+| `llama3.2:3b` | 6 GB | ⚡⚡ Rápido | ⭐⭐⭐ Buena | `ollama pull llama3.2:3b` |
+| `llama3.1:8b` | 8 GB | ⚡ Normal | ⭐⭐⭐⭐ Muy buena | `ollama pull llama3.1:8b` |
+| `llama3.1:70b` | 48 GB | 🐢 Lento | ⭐⭐⭐⭐⭐ Excelente | `ollama pull llama3.1:70b` |
+
+#### Pasos para Cambiar el Modelo
+
+**1. Descargar el nuevo modelo:**
 ```bash
-# Descargar nuevo modelo
 ollama pull llama3.2:3b
+```
 
-# Editar docker-compose.yml
-# Cambiar OLLAMA_MODEL=llama3.2:3b
+**2. Editar `docker-compose.yml`:**
+```yaml
+environment:
+  - OLLAMA_URL=http://host.docker.internal:11434
+  - OLLAMA_MODEL=llama3.2:3b  # ← Cambiar aquí
+```
 
-# Reiniciar
+**3. Reiniciar el chatbot:**
+```bash
 docker compose down && docker compose up
 ```
 
-### Personalizar el System Prompt
+#### Ver Modelos Instalados
+```bash
+ollama list
+```
 
-El comportamiento del chatbot se define en:
+#### Eliminar un Modelo
+```bash
+ollama rm llama3.1:8b
+```
+
+---
+
+### 📝 Modificar las Instrucciones del Modelo (System Prompt)
+
+El **System Prompt** define la personalidad, conocimientos y comportamiento del chatbot. Este archivo contiene toda la información sobre la carrera de ICC que el modelo usa para responder.
+
+#### Ubicación del Archivo
 ```
 backend/prompts/system_prompt.txt
 ```
 
-Después de modificarlo, reinicia el contenedor:
+#### Estructura del System Prompt
+
+```
+┌─────────────────────────────────────────────┐
+│  CONTEXTO          → Quién es el asistente  │
+│  EVENTO EN VIVO    → Estado actual          │
+│  INFORMACIÓN       → Datos de la carrera    │
+│  INSTRUCCIONES     → Cómo debe responder    │
+└─────────────────────────────────────────────┘
+```
+
+#### Editar el System Prompt
+
+**1. Abre el archivo con tu editor favorito:**
 ```bash
+# Con VS Code
+code backend/prompts/system_prompt.txt
+
+# Con nano
+nano backend/prompts/system_prompt.txt
+
+# Con vim
+vim backend/prompts/system_prompt.txt
+```
+
+**2. Modifica el contenido según necesites:**
+
+```text
+# Ejemplo: Cambiar el nombre del director
+Director: Ing. Carlos Camacho  →  Director: Ing. Nuevo Nombre
+
+# Ejemplo: Actualizar fechas del evento
+Fechas: Miércoles 11 y Jueves 12 de Febrero de 2026
+
+# Ejemplo: Agregar nueva información
+CLUBES ESTUDIANTILES:
+- Club de Programación Competitiva
+- Club de Inteligencia Artificial
+- Club de Desarrollo de Videojuegos
+```
+
+**3. Guarda el archivo y reinicia el contenedor:**
+```bash
+docker compose restart
+```
+
+#### Secciones que Puedes Modificar
+
+| Sección | Descripción | Ejemplo |
+|---------|-------------|---------|
+| **Nombre del asistente** | Cómo se presenta el bot | "Asistente Virtual del Open House ICC" |
+| **Contexto del evento** | Estado actual (en vivo/próximo) | "El evento está ocurriendo AHORA MISMO" |
+| **Fechas y horarios** | Información del evento | "11 y 12 de Febrero de 2026" |
+| **Director** | Nombre del director actual | "Ing. Carlos Camacho" |
+| **Pensum** | Lista de materias | Agregar o quitar materias |
+| **Perfil del egresado** | Descripción profesional | Actualizar competencias |
+| **Ámbito laboral** | Oportunidades de trabajo | Agregar nuevas áreas |
+| **Instrucciones** | Comportamiento del bot | Tono, idioma, restricciones |
+
+#### Tips para un Buen System Prompt
+
+✅ **Sé específico** — Mientras más detalles, mejores respuestas
+```text
+❌ "Responde preguntas sobre la carrera"
+✅ "Responde preguntas sobre ICC de la PUCMM, enfocándote en el pensum, duración y perfil del egresado"
+```
+
+✅ **Define restricciones claras**
+```text
+"NUNCA inventes información que no esté en este documento"
+"Si no sabes algo, admítelo honestamente"
+```
+
+✅ **Establece el tono**
+```text
+"Sé amigable y entusiasta, pero profesional"
+"Usa un lenguaje accesible para estudiantes de secundaria"
+```
+
+✅ **Contextualiza el evento**
+```text
+"El usuario está PRESENTE en el evento, no uses frases como 'te esperamos'"
+```
+
+#### Restaurar System Prompt Original
+
+Si necesitas volver al prompt original, puedes descargarlo desde el repositorio o usar este respaldo:
+
+```bash
+# Hacer backup antes de modificar
+cp backend/prompts/system_prompt.txt backend/prompts/system_prompt.backup.txt
+
+# Restaurar desde backup
+cp backend/prompts/system_prompt.backup.txt backend/prompts/system_prompt.txt
 docker compose restart
 ```
 
