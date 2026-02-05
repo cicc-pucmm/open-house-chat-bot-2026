@@ -1,0 +1,16 @@
+services:
+  chatbot:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_URL=http://host.docker.internal:11434
+      - OLLAMA_MODEL=llama3.1:8b
+    volumes:
+      - ./frontend:/app/frontend:ro
+      - ./backend/prompts:/app/prompts:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped

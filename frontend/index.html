@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Open House ICC - PUCMM 2026</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Marked.js for Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="min-h-screen overflow-hidden transition-colors duration-500">
+    <!-- Animated Background - Dark Theme -->
+    <div class="fixed inset-0 z-0 bg-dark-theme transition-opacity duration-500">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
+        <div class="absolute top-0 -left-40 w-80 h-80 bg-primary-600/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float"></div>
+        <div class="absolute top-0 -right-40 w-80 h-80 bg-accent-600/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute -bottom-40 left-1/2 w-80 h-80 bg-primary-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float" style="animation-delay: -4s;"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNNjAgMEgwdjYwaDYwVjB6TTU5IDFIMXY1OGg1OFYxeiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-40"></div>
+    </div>
+
+    <!-- Animated Background - Light Theme -->
+    <div class="fixed inset-0 z-0 bg-light-theme transition-opacity duration-500 opacity-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50"></div>
+        <div class="absolute top-0 -left-40 w-96 h-96 bg-primary-400/40 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-float"></div>
+        <div class="absolute top-0 -right-40 w-96 h-96 bg-accent-400/30 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute -bottom-40 left-1/2 w-96 h-96 bg-cyan-400/30 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-float" style="animation-delay: -4s;"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNNjAgMEgwdjYwaDYwVjB6TTU5IDFIMXY1OGg1OFYxeiIgZmlsbD0icmdiYSgwLDAsMCwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 flex flex-col h-screen max-w-5xl mx-auto px-4 py-4">
+
+        <!-- Header -->
+        <header class="flex-shrink-0 mb-4">
+            <div class="header-card rounded-2xl px-6 py-4 transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-primary-500/50 rounded-full blur-lg"></div>
+                            <img src="/assets/pucmm.png" alt="PUCMM" class="relative h-12 w-12 object-contain rounded-full ring-2 ring-white/20">
+                        </div>
+                        <div class="hidden sm:block">
+                            <p class="text-xs uppercase tracking-wider header-subtitle">Pontificia Universidad Católica Madre y Maestra</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <h1 class="font-display text-2xl md:text-3xl font-bold header-title">
+                            Open House 2026
+                        </h1>
+                        <div class="flex items-center justify-center gap-2 mt-1">
+                            <span class="live-badge">
+                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
+                                En vivo
+                            </span>
+                            <span class="text-xs header-date">11-12 Feb</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <!-- Theme Toggle -->
+                        <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+                            <div class="theme-toggle-track">
+                                <i data-lucide="sun" class="theme-icon sun-icon"></i>
+                                <i data-lucide="moon" class="theme-icon moon-icon"></i>
+                                <div class="theme-toggle-thumb"></div>
+                            </div>
+                        </button>
+
+                        <div class="hidden md:flex items-center gap-4">
+                            <div class="text-right">
+                                <p class="text-sm font-medium header-text">Ing. Ciencias de la Computación</p>
+                                <p class="text-xs header-subtitle">Campus Santiago</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute inset-0 bg-accent-500/50 rounded-full blur-lg"></div>
+                                <img src="/assets/logo_cicc.png" alt="ICC" class="relative h-12 w-12 object-contain rounded-full ring-2 ring-white/20">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <main class="flex-1 flex flex-col min-h-0 gap-4">
+
+            <!-- Messages Area -->
+            <div class="flex-1 chat-card rounded-2xl p-4 overflow-hidden flex flex-col transition-all duration-300">
+                <div id="chatBox" class="flex-1 overflow-y-auto pr-2 space-y-4 scroll-smooth">
+
+                    <!-- Welcome Message -->
+                    <div id="welcomeMessage" class="flex flex-col items-center justify-center h-full text-center py-8 animate-fade-in">
+                        <div class="relative mb-6">
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full blur-2xl opacity-50 scale-150"></div>
+                            <div class="relative welcome-logo-card p-6 rounded-full">
+                                <img src="/assets/logo_cicc.png" alt="ICC Logo" class="w-20 h-20">
+                            </div>
+                        </div>
+
+                        <h2 class="font-display text-2xl font-bold welcome-title mb-2">
+                            ¡Bienvenido al Open House!
+                        </h2>
+                        <p class="welcome-subtitle max-w-md mb-6">
+                            Soy tu asistente virtual. Pregúntame sobre la carrera de Ingeniería en Ciencias de la Computación.
+                        </p>
+
+                        <!-- Feature Pills -->
+                        <div class="flex flex-wrap justify-center gap-2 mb-6">
+                            <span class="feature-pill">
+                                <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                                4 años
+                            </span>
+                            <span class="feature-pill">
+                                <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                                42 materias
+                            </span>
+                            <span class="feature-pill">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                                Santiago & SD
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggestions -->
+            <div id="suggestions" class="flex-shrink-0 flex flex-wrap gap-2 justify-center">
+                <button onclick="sendSuggestion('¿Cuánto dura la carrera?')" class="suggestion-btn group">
+                    <i data-lucide="clock" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    <span>Duración</span>
+                </button>
+                <button onclick="sendSuggestion('¿Quién es el director de la carrera?')" class="suggestion-btn group">
+                    <i data-lucide="user" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    <span>Director</span>
+                </button>
+                <button onclick="sendSuggestion('¿Qué materias tiene la carrera?')" class="suggestion-btn group">
+                    <i data-lucide="book-open" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    <span>Materias</span>
+                </button>
+                <button onclick="sendSuggestion('¿Cuándo y dónde es el Open House?')" class="suggestion-btn group">
+                    <i data-lucide="calendar" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    <span>Evento</span>
+                </button>
+                <button onclick="sendSuggestion('¿En qué puedo trabajar al graduarme?')" class="suggestion-btn group">
+                    <i data-lucide="briefcase" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                    <span>Empleos</span>
+                </button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="flex-shrink-0">
+                <div class="input-card rounded-2xl p-2 transition-all duration-300">
+                    <div class="flex gap-2">
+                        <div class="flex-1 relative">
+                            <input
+                                type="text"
+                                id="messageInput"
+                                placeholder="Escribe tu pregunta aquí..."
+                                class="chat-input w-full rounded-xl px-4 py-3.5 transition-all duration-300"
+                                onkeypress="handleKeyPress(event)"
+                            >
+                        </div>
+                        <button
+                            id="sendButton"
+                            onclick="sendMessage()"
+                            class="send-btn group"
+                        >
+                            <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                            <span class="hidden sm:inline ml-2">Enviar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="flex-shrink-0 text-center py-3">
+            <p class="text-xs footer-text transition-colors duration-300">
+                PUCMM • Open House 2026 •
+                <span class="footer-highlight">Ingeniería en Ciencias de la Computación</span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Screen reader announcement for theme changes -->
+    <div id="theme-announcement" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="/js/chat.js"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/mouse-effects.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
